@@ -1,0 +1,183 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://service.ws/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="AuthServicesService" targetNamespace="http://service.ws/">
+  <wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://service.ws/" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://service.ws/">
+  <xs:element name="createAccount" type="tns:createAccount"/>
+  <xs:element name="createAccountResponse" type="tns:createAccountResponse"/>
+  <xs:element name="getLogCallFromId" type="tns:getLogCallFromId"/>
+  <xs:element name="getLogCallFromIdResponse" type="tns:getLogCallFromIdResponse"/>
+  <xs:element name="loginUser" type="tns:loginUser"/>
+  <xs:element name="loginUserResponse" type="tns:loginUserResponse"/>
+  <xs:complexType name="getLogCallFromId">
+    <xs:sequence>
+      <xs:element name="idLogCall" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getLogCallFromIdResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:logCallData"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="logCallData">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="codeLog" type="xs:string"/>
+      <xs:element minOccurs="0" name="dateTime" type="xs:dateTime"/>
+      <xs:element name="errorCode" type="xs:int"/>
+      <xs:element minOccurs="0" name="errorInfo" type="xs:string"/>
+      <xs:element name="idLogCall" type="xs:int"/>
+      <xs:element minOccurs="0" name="parameters" type="xs:string"/>
+      <xs:element minOccurs="0" name="webMethod" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="authWSFaultBean">
+    <xs:sequence>
+      <xs:element name="error" type="xs:int"/>
+      <xs:element minOccurs="0" name="message" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="loginUser">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="credentials" type="tns:credentials"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="credentials">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="password" type="xs:string"/>
+      <xs:element minOccurs="0" name="username" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="loginUserResponse">
+    <xs:sequence/>
+  </xs:complexType>
+  <xs:complexType name="createAccount">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="individualUser" type="tns:individualUser"/>
+      <xs:element minOccurs="0" name="credentials" type="tns:credentials"/>
+      <xs:element minOccurs="0" name="contacts" type="tns:contacts"/>
+      <xs:element minOccurs="0" name="notificationType" type="xs:string"/>
+      <xs:element minOccurs="0" name="signedContract" type="xs:base64Binary"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="individualUser">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="firstName" type="xs:string"/>
+      <xs:element name="idUser" type="xs:int"/>
+      <xs:element minOccurs="0" name="identificationCode" type="xs:string"/>
+      <xs:element minOccurs="0" name="identificationCountry" type="xs:string"/>
+      <xs:element minOccurs="0" name="identificationType" type="xs:string"/>
+      <xs:element minOccurs="0" name="lastName" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="contacts">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="email" type="xs:string"/>
+      <xs:element minOccurs="0" name="mobile" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="createAccountResponse">
+    <xs:sequence/>
+  </xs:complexType>
+  <xs:element name="AuthWSException" nillable="true" type="tns:authWSFaultBean"/>
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="getLogCallFromId">
+    <wsdl:part element="tns:getLogCallFromId" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="loginUserResponse">
+    <wsdl:part element="tns:loginUserResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getLogCallFromIdResponse">
+    <wsdl:part element="tns:getLogCallFromIdResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createAccountResponse">
+    <wsdl:part element="tns:createAccountResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="loginUser">
+    <wsdl:part element="tns:loginUser" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="AuthWSException">
+    <wsdl:part element="tns:AuthWSException" name="AuthWSException">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createAccount">
+    <wsdl:part element="tns:createAccount" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="AuthServices">
+    <wsdl:operation name="getLogCallFromId">
+<wsdl:documentation>funzione che estrae un record dalla tabella logcall</wsdl:documentation>
+      <wsdl:input message="tns:getLogCallFromId" name="getLogCallFromId">
+    </wsdl:input>
+      <wsdl:output message="tns:getLogCallFromIdResponse" name="getLogCallFromIdResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:AuthWSException" name="AuthWSException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="loginUser">
+<wsdl:documentation>funzione che permette ad un utente di effettuare il login</wsdl:documentation>
+      <wsdl:input message="tns:loginUser" name="loginUser">
+    </wsdl:input>
+      <wsdl:output message="tns:loginUserResponse" name="loginUserResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:AuthWSException" name="AuthWSException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="createAccount">
+<wsdl:documentation>funzione che crea l'account per un utente</wsdl:documentation>
+      <wsdl:input message="tns:createAccount" name="createAccount">
+    </wsdl:input>
+      <wsdl:output message="tns:createAccountResponse" name="createAccountResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:AuthWSException" name="AuthWSException">
+    </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="AuthServicesServiceSoapBinding" type="tns:AuthServices">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getLogCallFromId">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getLogCallFromId">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getLogCallFromIdResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="AuthWSException">
+        <soap:fault name="AuthWSException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="loginUser">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="loginUser">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="loginUserResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="AuthWSException">
+        <soap:fault name="AuthWSException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="createAccount">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="createAccount">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="createAccountResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="AuthWSException">
+        <soap:fault name="AuthWSException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="AuthServicesService">
+    <wsdl:port binding="tns:AuthServicesServiceSoapBinding" name="AuthServicesPort">
+      <soap:address location="http://localhost:8080/Auth/services"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

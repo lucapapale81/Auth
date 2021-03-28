@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Class-Path: 
+Build-Jdk-Spec: 1.8
+Created-By: Maven Integration for Eclipse
+Dependencies: org.apache.cxf org.hibernate com.mysql
+
